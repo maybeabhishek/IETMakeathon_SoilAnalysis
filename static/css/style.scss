@@ -7,12 +7,16 @@ body{
   height: 100vh;
 }
 
+.navbar{
+  box-shadow: 2px 5px 10px rgba(0,0,0,0.2), 5px 10px 15px rgba(0,0,0,0.1);
+}
+
 .sensorTable{
   tr{
     td:nth-child(1){
       font-weight: 800;
       font-size: 1.2rem;
-      color: #0d47a1;
+      color: #1976d2;
     }
   }
 }
