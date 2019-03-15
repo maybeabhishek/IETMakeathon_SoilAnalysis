@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Select Device</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/form.css">
+</head>
+
+<body>
+
+  <div class="form-center">
+    <form action="/setDevice" method="POST">
+      <div class="form-group">
+        <label for="deviceID" class="text-secondary"><h3>Enter device ID</h3></label>
+        <input class="form-control" type="text" name="deviceID" id="deviceID">
+      </div>
+      <button type="submit" class="btn btn-success">Set Device</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

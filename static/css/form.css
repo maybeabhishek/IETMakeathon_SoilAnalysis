@@ -1,0 +1,16 @@
+html, body {
+  min-height: 100vh;
+  width: 100vw;
+}
+
+body {
+  border: 1px solid red;
+}
+
+.form-center {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20%;
+}
+/*# sourceMappingURL=form.css.map */
