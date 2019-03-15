@@ -61,11 +61,18 @@
           </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">...
+          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+              <div id='chart_id_temp' class="chart"></div>
           </div>
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
-          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
-          <div class="tab-pane fade" id="pills-humidity" role="tabpanel" aria-labelledby="pills-humidity-tab">...</div>
+          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+              <div id='chart_id_ph' class="chart"></div>
+          </div>
+          <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+              <div id='chart_id_moisture' class="chart"></div>
+          </div>
+          <div class="tab-pane fade" id="pills-humidity" role="tabpanel" aria-labelledby="pills-humidity-tab">
+              <div id='chart_id_humidity' class="chart"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +84,14 @@
   <script src="/static/lib/jquery.min.js"></script>
   <script src="/static/js/bootstrap.js"></script>
   <script src="/static/js/sensor.js"></script>
+
+  <!-- Graphs -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="/static/js/tempGraph.js"></script>
+  <script src="/static/js/phGraph.js"></script>
+  <script src="/static/js/moistureGraph.js"></script>
+  <script src="/static/js/humidityGraph.js"></script>
 </body>
 
 </html>
