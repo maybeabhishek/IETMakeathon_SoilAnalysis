@@ -2,6 +2,7 @@
 var tempData = null;
 var phData = null;
 var moistureData = null;
+var humidityData = null;
 function getSensor(){
   $.ajax({
     url:"/getSensor",
@@ -14,6 +15,8 @@ function getSensor(){
           phData = data.values[element];
         else if(element == 'moistureValue')
           moistureData = data.values[element]
+        else if(element == 'humidityValue')
+          humidityData = data.values[element]
       });
     }
   })

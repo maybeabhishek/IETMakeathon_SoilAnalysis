@@ -9,7 +9,7 @@ $(document).ready(function () {
           // set up the updating of the chart each second
           var series = this.series[0];
           setInterval(function () {
-            series.addPoint(moistureData, true, true);
+            series.addPoint(humidityData, true, true);
           }, 1000);
         }
       }
