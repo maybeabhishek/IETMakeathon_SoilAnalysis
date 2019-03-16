@@ -15,9 +15,8 @@ body {
   color: #1976d2;
 }
 
-iframe {
-  width: 100%;
-  height: 500px;
+.microImg {
+  text-align: center;
 }
 
 .inference {

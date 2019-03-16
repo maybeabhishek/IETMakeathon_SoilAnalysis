@@ -14,22 +14,19 @@ def edgedetect(channel):
   return sobel
 
 def bigParticles(img):
-  blurred = cv2.GaussianBlur(img, (25, 25), 0)  # Remove noise
-  kernel = np.ones((4, 4), np.uint8)
-  blurred = cv2.erode(blurred, kernel, iterations=2)
-  blurred = cv2.bilateralFilter(blurred,9,75,75)
-  opening = cv2.morphologyEx(blurred, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(20,20)))
-  blurred = opening
-  blurred = cv2.medianBlur(img,25)
-
-
+  blurred=img
+  blurred = cv2.medianBlur(blurred,25)
   edgeImg = np.max(np.array([edgedetect(blurred[:, :, 0]), edgedetect(blurred[:, :, 1]), edgedetect(blurred[:, :, 2])]), axis=0)
-  # Open and close the image
-  edgeImg = cv2.erode(edgeImg, kernel*2, iterations=1)
-  edgeImg = cv2.morphologyEx(edgeImg, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2,2)))
-  edgeImg[edgeImg>0]=255
+  kernel = np.ones((4, 4), np.uint8)
+  blurred=edgeImg
+  
 
-  _, thresh = cv2.threshold(edgeImg, 100, 255, cv2.THRESH_BINARY) # Optimize this
+  # Open and close the image
+  # edgeImg = cv2.erode(edgeImg, kernel*2, iterations=1)
+  # edgeImg = cv2.morphologyEx(edgeImg, cv2.MORPH_OPEN, cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(2,2)))
+  # edgeImg[edgeImg>0]=255
+
+  _, thresh = cv2.threshold(edgeImg, 120, 255, cv2.THRESH_BINARY) # Optimize this
   contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
   try: hierarchy = hierarchy[0]
@@ -51,6 +48,7 @@ def bigParticles(img):
 
   for i in sorted(particles):
     print(i)
+  
 
 
 def smallParticles(img):
@@ -84,18 +82,14 @@ def smallParticles(img):
 
   for i in sorted(particles):
     print(i)
-
-  # cv2.imshow('blurred', thresh)
   # cv2.imshow('orig', img)
   # if cv2.waitKey(0) & 0xFF:
   #   cv2.destroyAllWindows()
 
-img = cv2.imread('sample.jpg')
+img = cv2.imread('static/uploads/upload.jpg')
 bigParticles(img)
 smallParticles(img)
-cv2.imshow('orig', img)
-# cv2.imshow('blurred', blurred)
-# cv2.imshow('edge', edgeImg)
-# cv2.imshow('image', thresh)
-if cv2.waitKey(0) & 0xFF:
-  cv2.destroyAllWindows()
+# cv2.imshow('img', img)
+# if cv2.waitKey(0) & 0xFF:
+#   cv2.destroyAllWindows()
+cv2.imwrite("static/uploads/detection.jpg", img)
