@@ -11,20 +11,23 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container mt-4">
         <div class="form-centre">
             <form action="/saveData" method="POST">
                 <div class="form-group">
-                    <input type="text" placeholder="temperature" name = "temperature" id = "temperature">
+                    <input type="text" placeholder="device" name="device" id="device">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="moisture" name = "moisture" id = "moisture">
+                    <input type="text" placeholder="temperature" name="temperature" id="temperature">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="ph" name = "ph" id = "ph">
+                    <input type="text" placeholder="moisture" name="moisture" id="moisture">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="humidity" name = "humidity" id = "humidity">
+                    <input type="text" placeholder="ph" name="ph" id="ph">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="humidity" name="humidity" id="humidity">
                 </div>
                 <button type="submit" class="btn btn-success">Set Device</button>
             </form>

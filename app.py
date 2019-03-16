@@ -2,7 +2,7 @@ import time
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from device import Device
 from random import randint
-from sensor import updateData
+from sensor import *
 
 # =========
 # Default Values
@@ -13,7 +13,7 @@ from sensor import updateData
 # =========
 app = Flask(__name__)
 device = Device()
-
+conn = createConnection()
 @app.context_processor
 def inject_user():
 		return dict(deviceID = device.deviceID)
@@ -35,12 +35,21 @@ def setDevice():
 def rend():
     return render_template("form.html")
 
+@app.route("/table")
+def showTable():
+    showAll(conn)
+    return render_template("index.html")
+
 @app.route("/saveData",methods = ["POST"])
 def saveData():
     if request.method == "POST":
-        updateData(time.time(),request.form['device'],request.form['temperature'],0)
+        
+        updateData(conn,request.form['device'],request.form['temperature'],0)
+        updateData(conn,request.form['device'],request.form['moisture'],1)
+        updateData(conn,request.form['device'],request.form['ph'],2)
+        updateData(conn,request.form['device'],request.form['humidity'],3)
         print("Device value updated in table")
-        return render_template("index.html")
+        return redirect(url_for("showTable"))
 
 @app.route("/microscope")
 def renderMicroscope():
@@ -49,12 +58,12 @@ def renderMicroscope():
 
 @app.route("/getSensor")
 def returnSensor():
-	values = {}
-	values['temperatureValue'] = randint(20, 50);
-	values['phValue'] = randint(3, 8)
-	values['moistureValue'] = randint(40, 80)
-	values['humidityValue'] = randint(50, 100)
-	return jsonify(values = values)
+  values = {}
+  values['temperatureValue'] = randint(20, 50)
+  values['phValue'] = randint(3, 8)
+  values['moistureValue'] = randint(40, 80)
+  values['humidityValue'] = randint(50, 100)
+  return jsonify(values = values)
 
 # =========
 # Start App
