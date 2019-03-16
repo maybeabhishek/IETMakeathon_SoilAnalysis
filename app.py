@@ -1,8 +1,16 @@
-
+import sqlite3,time
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from device import Device
 from random import randint
+from sensor import updateData
 
+# =========
+# Default Values
+# 0 - Temperature
+# 1 - Moisture
+# 2 - PH
+# 3 - Humidity
+# =========
 app = Flask(__name__)
 device = Device()
 
@@ -22,6 +30,15 @@ def setDevice():
 		device.setDeviceID(request.form['deviceID'])
 		print("Device set as: ", device.deviceID)
 		return redirect(url_for("renderRoot"))
+
+@app.route("/saveData",methods = ["POST"])
+def saveData():
+    if request.method == "POST":
+        updateData(time.time(),request.form['temperature'],)
+
+
+
+
 
 @app.route("/microscope")
 def renderMicroscope():
