@@ -48,6 +48,8 @@ def showAll(conn,cur):
 def latestData(conn,cur):
     cur.execute('''SELECT * FROM SENSOR ORDER BY TIMESTAMP DESC LIMIT 1''')
     rows = cur.fetchall()
+    for row in rows:
+        print(row)
     return rows[1:]
 
 def getRowsByDeviceID(conn, cur, deviceID):
