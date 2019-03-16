@@ -43,10 +43,10 @@ def setDevice():
 @app.route("/saveData",methods = ["GET"])
 def saveData():
     if request.method == "GET":
-        updateData(conn,request.form['device'],request.form['temperature'],0)
-        updateData(conn,request.form['device'],request.form['moisture'],1)
-        updateData(conn,request.form['device'],request.form['ph'],2)
-        updateData(conn,request.form['device'],request.form['humidity'],3)
+        updateData(conn,request.args.get('device'),request.args.get('temperature'),0)
+        updateData(conn,request.args.get('device'),request.args.get('moisture'),1)
+        updateData(conn,request.args.get('device'),request.args.get('ph'),2)
+        updateData(conn,request.args.get('device'),request.args.get('humidity'),3)
         print("Device value updated in table")
         return "Success"
 
