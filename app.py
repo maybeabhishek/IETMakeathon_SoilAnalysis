@@ -1,4 +1,4 @@
-import time
+import time, requests
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from device import Device
 from random import randint
@@ -57,12 +57,16 @@ def renderMicroscope():
 
 @app.route("/getSensor")
 def returnSensor():
+  URL = "http://34.73.217.199/sendSensor"
+  r = requests.get(url = URL) 
+  data = r.json()
+  print(data)
   values = {}
   values['temperatureValue'] = randint(20, 50)
   values['phValue'] = randint(3, 8)
   values['moistureValue'] = randint(40, 80)
   values['humidityValue'] = randint(50, 100)
-  
+
   return jsonify(values = values)
 
 # =========
