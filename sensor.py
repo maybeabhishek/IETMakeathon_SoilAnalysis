@@ -3,7 +3,7 @@ import json
 from sqlite3 import Error
 
 def createConnection():
-    conn = sqlite3.connect('sensor.db')
+    conn = sqlite3.connect('sensor.db', check_same_thread=False)
     print("Opened database successfully")
     return conn
 
