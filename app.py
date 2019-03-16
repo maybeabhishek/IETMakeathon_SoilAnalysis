@@ -65,6 +65,9 @@ def returnSensor():
   
   return jsonify(values = values)
 
+@app.route("/sendSensor")
+def data():
+  return jsonify(data = latestData(conn))
 # =========
 # Start App
 # =========
