@@ -60,12 +60,24 @@ def returnSensor():
   URL = "http://34.73.217.199/sendSensor"
   r = requests.get(url = URL) 
   data = r.json()
-  print(data)
+  print(data['data'])
   values = {}
-  values['temperatureValue'] = randint(20, 50)
-  values['phValue'] = randint(3, 8)
-  values['moistureValue'] = randint(40, 80)
-  values['humidityValue'] = randint(50, 100)
+  # device evalue type
+  if(data['data'][-1]==0):
+    values['temperatureValue'] = data['data'][-2]
+  
+  if(data['data'][-1]==2):
+    values['phValue'] = data['data'][-2]
+  
+  if(data['data'][-1]==1):
+    values['moistureValue'] = data['data'][-2]
+  
+  if(data['data'][-1]==3):
+    values['humidityValue'] = data['data'][-2]
+  
+#   values['phValue'] = randint(3, 8)
+#   values['moistureValue'] = randint(40, 80)
+#   values['humidityValue'] = randint(50, 100)
 
   return jsonify(values = values)
 
