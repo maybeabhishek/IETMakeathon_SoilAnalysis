@@ -31,25 +31,24 @@ def setDevice():
 		print("Device set as: ", device.deviceID)
 		return redirect(url_for("renderRoot"))
 
-@app.route("/form")
-def rend():
-    return render_template("form.html")
+# @app.route("/form")
+# def rend():
+#     return render_template("form.html")
 
-@app.route("/table")
-def showTable():
-    showAll(conn)
-    return render_template("index.html")
+# @app.route("/table")
+# def showTable():
+#     showAll(conn)
+#     return render_template("index.html")
 
-@app.route("/saveData",methods = ["POST"])
+@app.route("/saveData",methods = ["GET"])
 def saveData():
-    if request.method == "POST":
-        
+    if request.method == "GET":
         updateData(conn,request.form['device'],request.form['temperature'],0)
         updateData(conn,request.form['device'],request.form['moisture'],1)
         updateData(conn,request.form['device'],request.form['ph'],2)
         updateData(conn,request.form['device'],request.form['humidity'],3)
         print("Device value updated in table")
-        return redirect(url_for("showTable"))
+        return "Success"
 
 @app.route("/microscope")
 def renderMicroscope():
@@ -63,6 +62,7 @@ def returnSensor():
   values['phValue'] = randint(3, 8)
   values['moistureValue'] = randint(40, 80)
   values['humidityValue'] = randint(50, 100)
+  
   return jsonify(values = values)
 
 # =========
