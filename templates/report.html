@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Report</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="/static/css/bootstrap.css">
+</head>
+
+<body>
+  <script>
+    function getCropsByPH(ph) {
+      if (ph < 5.0)
+        throw 'Error: Soil too acidic!';
+      else if (ph >= 5.0 && ph <= 5.5)
+        return ['blueberries', 'irish potato', 'sweet potato']
+      else if (ph <= 6.5)
+        return ['Barley','Bluegrass','Corn','Cotton','Fescue','Grain Sorghum','Peanuts','Rice	 ','Soybeans','Watermelon','Wheat'];
+      else if (ph<=7)
+        return ['Alfalfa', 'Clovers', 'Beet']
+    }
+    // SOIL ACIDITY	NITROGEN	PHOSPHATE	POTASH	FERTILIZER WASTED
+    // Efficiency
+    function getDetailsByAcidity(acidity){
+      if(acidity <= 4.5)
+        return [30, 23, 33, 71.34]
+      else if(acidity <= 4.5)
+        return [53, 34, 52, 53.67]
+      else if(acidity <= 4.5)
+        return [77,	48,	77, 32.69]
+      else if(acidity <= 4.5)
+        return [89,	52,	100, 19.67]
+      else if(acidity <= 4.5)
+        return [100, 100, 100, 00.0]
+        
+    }
+
+  </script>
+  <div class="container mt-4">
+    <h1 class="text-primary">Soil Analysis Report</h1>
+    <hr>
+    <div class="soilPhysicalValuesReport">
+
+    </div>
+  </div>
+</body>
+
+</html>

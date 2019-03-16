@@ -1,0 +1,27 @@
+body {
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.navbar {
+  -webkit-box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2), 5px 10px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2), 5px 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.sensorTable tr td:nth-child(1) {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: #1976d2;
+}
+
+iframe {
+  width: 100%;
+  height: 500px;
+}
+
+.inference {
+  font-style: italic;
+  color: #1976d2;
+}
+/*# sourceMappingURL=style.css.map */
