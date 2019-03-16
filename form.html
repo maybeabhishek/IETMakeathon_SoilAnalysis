@@ -6,25 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Set Values</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/css/bootstrap.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+
+    
 </head>
 
 <body>
-    <div class="container">
-        <div class="form-centre">
+    <div class="container mt-4">
+        <div>
             <form action="/saveData" method="POST">
                 <div class="form-group">
-                    <input type="text" placeholder="temperature" name = "temperature" id = "temperature">
+                    <input type="text" placeholder="Device" name="device" id="device">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="moisture" name = "moisture" id = "moisture">
+                    <input type="text" placeholder="temperature" name="temperature" id="temperature">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="ph" name = "ph" id = "ph">
+                    <input type="text" placeholder="moisture" name="moisture" id="moisture">
                 </div>
                 <div class="form-group">
-                    <input type="text" placeholder="humidity" name = "humidity" id = "humidity">
+                    <input type="text" placeholder="ph" name="ph" id="ph">
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="humidity" name="humidity" id="humidity">
                 </div>
                 <button type="submit" class="btn btn-success">Set Device</button>
             </form>
