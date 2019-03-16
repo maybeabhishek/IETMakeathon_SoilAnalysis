@@ -43,10 +43,10 @@ def setDevice():
 @app.route("/saveData",methods = ["GET"])
 def saveData():
     if request.method == "GET":
-        updateData(conn,request.form['device'],request.form['temperature'],0)
-        updateData(conn,request.form['device'],request.form['moisture'],1)
-        updateData(conn,request.form['device'],request.form['ph'],2)
-        updateData(conn,request.form['device'],request.form['humidity'],3)
+        updateData(conn,request.args.get('device'),request.args.get('temperature'),0)
+        updateData(conn,request.args.get('device'),request.args.get('moisture'),1)
+        updateData(conn,request.args.get('device'),request.args.get('ph'),2)
+        updateData(conn,request.args.get('device'),request.args.get('humidity'),3)
         print("Device value updated in table")
         return "Success"
 
@@ -69,10 +69,13 @@ def returnSensor():
 
   return jsonify(values = values)
 
+@app.route("/sendSensor")
+def data():
+  return jsonify(data = latestData(conn))
 # =========
 # Start App
 # =========
 
 
 if __name__ == "__main__":
-	app.run(debug = True, host='0.0.0.0', port=8080, passthrough_errors=True)
+	app.run(debug = True, host='0.0.0.0', port=80, passthrough_errors=True)

@@ -51,7 +51,7 @@ def latestData(conn):
     cur = conn.cursor()
     cur.execute('''SELECT * FROM SENSOR ORDER BY TIMESTAMP DESC LIMIT 1''')
     rows = cur.fetchall()
-    return json.dumps({'rows': rows[1:]})
+    return rows[1:]
 
 def getRowsByDeviceID(conn, deviceID):
     cur = conn.cursor()
