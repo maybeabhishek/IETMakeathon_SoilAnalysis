@@ -18,7 +18,7 @@ def createTable(conn):
             TYPE INT);''')
     print("Table created successfully")
 
-def updateData(conn,device_id,value,typeD):
+def updateData(conn,cursor,device_id,value,typeD):
     conn = sqlite3.connect('sensor.db')
     print("Opened database successfully")
     ts = time.time()
@@ -33,9 +33,7 @@ def updateData(conn,device_id,value,typeD):
         print(e)
     
 
-def showAll(conn):
-    conn = sqlite3.connect('sensor.db')
-    cur = conn.cursor()
+def showAll(conn,cur):
     try:
         cur.execute('''SELECT * from SENSOR;''')
     except Error as e:
@@ -47,14 +45,12 @@ def showAll(conn):
         print(row)
 
 
-def latestData(conn):
-    cur = conn.cursor()
+def latestData(conn,cur):
     cur.execute('''SELECT * FROM SENSOR ORDER BY TIMESTAMP DESC LIMIT 1''')
     rows = cur.fetchall()
     return rows[1:]
 
-def getRowsByDeviceID(conn, deviceID):
-    cur = conn.cursor()
+def getRowsByDeviceID(conn, cur, deviceID):
     cur.execute('''SELECT * FROM SENSOR where DEVICE_ID = ?''',(deviceID,))
     rows = cur.fetchall()
     row = {}
@@ -68,8 +64,7 @@ def getRowsByDeviceID(conn, deviceID):
     # print(data)
     return json.dumps({'rows': rows})
 
-def getRowsByType(conn, deviceID, sensorType):
-    cur = conn.cursor()
+def getRowsByType(conn, cur,  deviceID, sensorType):
     cur.execute('''SELECT * FROM SENSOR where DEVICE_ID = ? AND TYPE = ?''',(deviceID,sensorType,))
     rows = cur.fetchall()
     row = {}

@@ -14,6 +14,7 @@ from sensor import *
 app = Flask(__name__)
 device = Device()
 conn = createConnection()
+cur = conn.cursor()
 @app.context_processor
 def inject_user():
 		return dict(deviceID = device.deviceID)
@@ -43,10 +44,10 @@ def setDevice():
 @app.route("/saveData",methods = ["GET"])
 def saveData():
     if request.method == "GET":
-        updateData(conn,request.args.get('device'),request.args.get('temperature'),0)
-        updateData(conn,request.args.get('device'),request.args.get('moisture'),1)
-        updateData(conn,request.args.get('device'),request.args.get('ph'),2)
-        updateData(conn,request.args.get('device'),request.args.get('humidity'),3)
+        updateData(conn,cur,request.args.get('device'),request.args.get('temperature'),0)
+        updateData(conn,cur,request.args.get('device'),request.args.get('moisture'),1)
+        updateData(conn,cur,request.args.get('device'),request.args.get('ph'),2)
+        updateData(conn,cur,request.args.get('device'),request.args.get('humidity'),3)
         print("Device value updated in table")
         return "Success"
 
@@ -71,7 +72,7 @@ def returnSensor():
 
 @app.route("/sendSensor")
 def data():
-  return jsonify(data = latestData(conn))
+  return jsonify(data = latestData(conn,cur))
 # =========
 # Start App
 # =========
