@@ -53,32 +53,35 @@ def saveData():
 @app.route("/microscope")
 def renderMicroscope():
 	return render_template("microscope.html")
-
+index = 0
 
 @app.route("/getSensor")
 def returnSensor():
+  global index
   URL = "http://34.73.217.199/sendSensor"
   r = requests.get(url = URL) 
   data = r.json()
   print(data['data'])
   values = {}
+  index+=1
   # device evalue type
-  if(data['data'][-1]==0):
+  if(data['data'][-1]==index):
     values['temperatureValue'] = data['data'][-2]
   
-  if(data['data'][-1]==2):
+  if(data['data'][-1]==index):
     values['phValue'] = data['data'][-2]
   
-  if(data['data'][-1]==1):
+  if(data['data'][-1]==index):
     values['moistureValue'] = data['data'][-2]
   
-  if(data['data'][-1]==3):
+  if(data['data'][-1]==index):
     values['humidityValue'] = data['data'][-2]
-  
+  print(data['data'][-1])
 #   values['phValue'] = randint(3, 8)
 #   values['moistureValue'] = randint(40, 80)
 #   values['humidityValue'] = randint(50, 100)
 
+  index=index%4
   return jsonify(values = values)
 
 # =========
