@@ -33,7 +33,7 @@ $(document).ready(function () {
         // generate an array of random data
         var data = [];
         for (i = -100; i <= 0; i += 1) {
-          data.push(Math.floor(Math.random() * 40 + 10));
+          data.push(Math.floor(Math.random() * 40 + 30));
         }
         return data;
       }())

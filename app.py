@@ -30,11 +30,14 @@ def setDevice():
 def renderMicroscope():
 	return render_template("microscope.html")
 
+@app.route("/report")
+def renderReport():
+	return render_template("report.html")
 
 @app.route("/getSensor")
 def returnSensor():
 	values = {}
-	values['temperatureValue'] = randint(20, 50)
+	values['temperatureValue'] = randint(30, 40)
 	values['phValue'] = randint(3, 8)
 	values['moistureValue'] = randint(40, 80)
 	values['humidityValue'] = randint(50, 100)

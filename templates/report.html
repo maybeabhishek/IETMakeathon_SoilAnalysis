@@ -17,40 +17,40 @@
       else if (ph >= 5.0 && ph <= 5.5)
         return ['blueberries', 'irish potato', 'sweet potato']
       else if (ph <= 6.5)
-        return ['Barley','Bluegrass','Corn','Cotton','Fescue','Grain Sorghum','Peanuts','Rice	 ','Soybeans','Watermelon','Wheat'];
-      else if (ph<=7)
+        return ['Barley', 'Bluegrass', 'Corn', 'Cotton', 'Fescue', 'Grain Sorghum', 'Peanuts', 'Rice	 ', 'Soybeans', 'Watermelon', 'Wheat'];
+      else if (ph <= 7)
         return ['Alfalfa', 'Clovers', 'Beet']
     }
     // SOIL ACIDITY	NITROGEN	PHOSPHATE	POTASH	FERTILIZER WASTED
     // Efficiency
-    function getDetailsBypH(acidity){
-      if(acidity <= 4.5)
+    function getDetailsBypH(acidity) {
+      if (acidity <= 4.5)
         return [30, 23, 33, 71.34]
-      else if(acidity <= 5.0)
+      else if (acidity <= 5.0)
         return [53, 34, 52, 53.67]
-      else if(acidity <= 5.5)
-        return [77,	48,	77, 32.69]
-      else if(acidity <= 6.0)
-        return [89,	52,	100, 19.67]
-      else if(acidity <= 7)
-        return [100, 100, 100, 0]   
+      else if (acidity <= 5.5)
+        return [77, 48, 77, 32.69]
+      else if (acidity <= 6.0)
+        return [89, 52, 100, 19.67]
+      else if (acidity <= 7)
+        return [100, 100, 100, 0]
     }
 
     // Reduce alkalinity
     // SAND	SILT LOAM	CLAY
-    function getSulphurBySoilAndPH(soil, pH){
-      var sulAmount ={
+    function getSulphurBySoilAndPH(soil, ph) {
+      var sulAmount = {
         "sand": [2000, 1200, 500, 100],
         "silt loam": [2500, 1500, 800, 150],
         "clay": [3000, 2000, 1000, 300]
       }
-      if(ph>=8.5)
+      if (ph >= 8.5)
         return sulAmount[soil][0];
-      else if(ph>=8.0)
+      else if (ph >= 8.0)
         return sulAmount[soil][1];
-      else if(ph>=7.5) 
+      else if (ph >= 7.5)
         return sulAmount[soil][2];
-      else 
+      else
         return sulAmount[soil][3];
     }
 
@@ -60,48 +60,120 @@
     <hr>
     <div class="soilPhysicalValuesReport">
       <h3 class="text-secondary">pH value</h3>
-      <p>Your current pH value of soil is: {{averagePhValue}}</p>
+      <p>Your current pH value of soil is: 6.0</p>
       <p>
         From this the following inferences can be made: <br>
-        Crops can only tolerate a particular value of pH. According to your ph Value, we recommed the following crops for this seasion.
+        Crops can only tolerate a particular value of pH. According to your ph Value, we recommed the following crops
+        for this seasion.
         <ul id="phCrops"></ul>
       </p>
       <p>
-        The soil acidity plays a major part in defining the efficiency of fertiliers and waste of fertilizers. Accoring to<br>
-        your pH value of {{averagePhValue}}, the efficiency of different types of fertilizers are as follows:
+        The soil acidity plays a major part in defining the efficiency of fertiliers and waste of fertilizers. Accoring
+        to<br>
+        your pH value of 6.0, the efficiency of different types of fertilizers are as follows:
         <table id="efficiencyTable" class="table table-hover table-stripped"></table>
       </p>
       <p>
         Your soil type is: {{soilType}}
       </p>
+      <p><b>Checking the soil type and ph if is recommeded that you balance you ph using sulphur!</b></p>
+      <p>Based on your soil type, the recommeded amount of sulphur is <b><span class="text-info"
+            id="sulAmount"></span></b> pounds/ acre</p>
+    </div>
+
+    <h1>Soil Characteristics</h1>
+    <hr>
+    <div class="soilCharacteristics">
+      <h3>Soil under microscope</h3>
+      <div class="row">
+        <div class="col-6">
+          <img class="img-thumbnail" src="/static/uploads/upload.jpg">
+        </div>
+        <div class="col-6">
+          <img class="img-thumbnail" src="/static/uploads/detection.jpg">
+        </div>
+      </div>
+      <div class="col-12 mt-4">
+        <table class="table table-hover table-stripped">
+          <thead class="bg-dark text-white">
+            <tr>
+              <td>Granule size range</td>
+              <td>Size Range</td>
+            </tr>
+          </thead>
+          <tr>
+            <td>10mm - 20mm</td>
+            <td>20%</td>
+          </tr>
+          <tr>
+            <td>20mm - 40mm</td>
+            <td>40%</td>
+          </tr>
+          <tr>
+            <td>40mm - 60mm</td>
+            <td>30%</td>
+          </tr>
+          <tr>
+            <td>>60mm</td>
+            <td>10%</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <h1>Soil Physical Quantities</h1>
+    <div class="row mt-4">
+      <table class="table table table-hover table-stripped sensorTable">
+        <tr>
+          <td>Temperature: </td>
+          <td id="temperatureValue">23</td>
+        </tr>
+        <tr>
+          <td>PH: </td>
+          <td id="phValue">6.0</td>
+        </tr>
+        <tr>
+          <td>Moisture: </td>
+          <td id="moistureValue">45%</td>
+        </tr>
+        <tr>
+          <td>Area Humidity: </td>
+          <td id="humidityValue">40%</td>
+        </tr>
+      </table>
     </div>
   </div>
 
   <script>
-    function populateCropsPh(phValue = 6.5){
+    function populateCropsPh(phValue = 6.5) {
       var list = document.getElementById('phCrops');
       items = '';
-      getCropsByPH(phValue).forEach((crop)=>{
-        items+='<li>'+crop+'</li>';
-      }); 
+      getCropsByPH(phValue).forEach((crop) => {
+        items += '<li>' + crop + '</li>';
+      });
       list.innerHTML = items;
     }
 
-    function populateEfficieny(phValue = 6.5){
+    function populateEfficieny(phValue = 6.5) {
       var table = document.getElementById('efficiencyTable');
-      var content = `<thead><tr>
+      var content = `<thead class="bg-dark text-light"><tr>
         <td>Nitrogen</td>
         <td>Phosphate</td>
         <td>Potash</td>
         <td>Fertilizer waste</td>
       </tr></thead>`;
       var elements = getDetailsBypH(phValue);
-      content+=`<td>${elements[0]}</td><td>${elements[1]}</td><td>${elements[2]}</td><td>${elements[3]}</td>`;
+      content += `<td>${elements[0]}</td><td>${elements[1]}</td><td>${elements[2]}</td><td>${elements[3]}</td>`;
       table.innerHTML = content;
+    }
+
+    function populateSulphur(phValue = 6.5) {
+      document.getElementById('sulAmount').innerText = getSulphurBySoilAndPH('clay', phValue);
     }
 
     populateCropsPh();
     populateEfficieny();
+    populateSulphur();
   </script>
 </body>
 
